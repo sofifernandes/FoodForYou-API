@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.sofiafernandes.foodforyou.model.Usuario;
 import com.sofiafernandes.foodforyou.repository.UsuarioRepository;
 
-@Service
+@Service("userDetailsService")
 public class UserDetailsServicelmpl {
 	
 	@Autowired
@@ -20,6 +20,6 @@ public class UserDetailsServicelmpl {
 		user.orElseThrow(() -> new UsernameNotFoundException(userName + " not found."));
 		
 		return user.map(UserDetailsImpl::new).get();
-	}
+	}	
 
 }
