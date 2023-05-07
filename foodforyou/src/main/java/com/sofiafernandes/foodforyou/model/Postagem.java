@@ -26,17 +26,21 @@ public class Postagem {
 	@Size(min = 2, max = 255)
 	private String tipoPostagem;
 	
-	@Size(min=0, max= 511)
-	private String textoPostagem;
-	
 	@Size(min=0, max=255)
 	private String titulo;
+	
+	@Size(min=0, max= 511)
+	private String textoPostagem;	
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date = new java.sql.Date(System.currentTimeMillis());
 	
+	private long qntComentarios;
+	
 	private long qntCurtidas;
 	
+	private long qntVisualizacoes;
+
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
 	private Tema tema;
@@ -107,5 +111,21 @@ public class Postagem {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	
+	public long getQntComentarios() {
+		return qntComentarios;
+	}
+
+	public void setQntComentarios(long qntComentarios) {
+		this.qntComentarios = qntComentarios;
+	}
+
+	public long getQntVisualizacoes() {
+		return qntVisualizacoes;
+	}
+
+	public void setQntVisualizacoes(long qntVisualizacoes) {
+		this.qntVisualizacoes = qntVisualizacoes;
 	}
 }

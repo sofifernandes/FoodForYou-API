@@ -2,11 +2,11 @@ package com.sofiafernandes.foodforyou.service;
 
 import java.nio.charset.Charset;
 import java.util.Optional;
-
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 import com.sofiafernandes.foodforyou.model.Usuario;
 import com.sofiafernandes.foodforyou.model.UsuarioLogin;
@@ -16,8 +16,8 @@ import com.sofiafernandes.foodforyou.repository.UsuarioRepository;
 public class UsuarioService {
 
 	@Autowired
-	private UsuarioRepository repository;
-
+	private UsuarioRepository repository;	
+	
 	public Usuario cadastrarUsuario(Usuario usuario) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -42,7 +42,6 @@ public class UsuarioService {
 				user.get().setToken(authHeader);
 				user.get().setNome(usuario.get().getNome());
 				user.get().setId(usuario.get().getId());
-				user.get().setFoto(usuario.get().getFoto());
 				user.get().setAdmin(usuario.get().isAdmin());
 
 				return user;
