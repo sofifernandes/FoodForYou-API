@@ -45,7 +45,7 @@ public class UsuarioController {
 	
 	@GetMapping("/nome/{nome}")
 	public ResponseEntity<Optional<Usuario>> getByName(@PathVariable String nome){
-		return ResponseEntity.ok(repository.findByUsuario(nome));
+		return ResponseEntity.ok(repository.findByNome(nome));
 	}
 
 	@PostMapping
