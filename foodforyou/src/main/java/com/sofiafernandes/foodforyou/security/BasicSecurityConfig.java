@@ -1,6 +1,7 @@
 package com.sofiafernandes.foodforyou.security;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -58,12 +59,13 @@ public class BasicSecurityConfig implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String usuario) throws UsernameNotFoundException {
-	    Usuario user = usuarioRepository.findByUsuario(usuario);
-	    if (user == null) {
+	    Optional<Usuario> user = usuarioRepository.findByUsuario(usuario);
+	    if (!user.isPresent()) {
 	        throw new UsernameNotFoundException("User not found with username: " + usuario);
 	    }
-	    return new org.springframework.security.core.userdetails.User(user.getUsuario(), user.getSenha(), new ArrayList<>());
+	    return new org.springframework.security.core.userdetails.User(user.orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + usuario)).getUsuario(), user.get().getSenha(), new ArrayList<>());
 	}
+
 	
 	@Bean
 	protected WebSecurityCustomizer webSecurityCustomizer(){
