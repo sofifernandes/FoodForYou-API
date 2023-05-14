@@ -47,6 +47,10 @@ public class Postagem {
 	
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
+	private Interesse interesse;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
 	private Usuario usuario;
 
 	public long getId() {
@@ -128,4 +132,12 @@ public class Postagem {
 	public void setQntVisualizacoes(long qntVisualizacoes) {
 		this.qntVisualizacoes = qntVisualizacoes;
 	}
+
+	public Interesse getInteresse() {
+		return interesse;
+	}
+
+	public void setInteresse(Interesse interesse) {
+		this.interesse = interesse;
+	}	
 }

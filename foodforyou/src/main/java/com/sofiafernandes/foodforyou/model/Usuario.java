@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -45,11 +44,7 @@ public class Usuario {
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
-	private List<Postagem> postagem;
-	
-	@ManyToOne
-	@JsonIgnoreProperties("usuario")
-	private Interesse interesse;		
+	private List<Postagem> postagem;			
 
 	public long getId() {
 		return id;
@@ -121,14 +116,6 @@ public class Usuario {
 
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
-	}
-	
-	public Interesse getInteresse() {
-		return interesse;
-	}
-
-	public void setInteresse(Interesse interesse) {
-		this.interesse = interesse;
 	}
 	
 }

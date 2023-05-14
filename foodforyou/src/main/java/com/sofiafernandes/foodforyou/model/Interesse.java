@@ -24,9 +24,9 @@ public class Interesse {
 	@Size(min = 2, max = 255)
 	private String nome;
 	
-	@OneToMany(mappedBy = "interesse", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("interesse")
-	private List<Usuario> usuario;
+	@OneToMany(mappedBy = "postagem", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("postagem")
+	private List<Postagem> postagem;
 
 	public long getId() {
 		return id;
@@ -44,12 +44,12 @@ public class Interesse {
 		this.nome = nome;
 	}
 
-	public List<Usuario> getUsuario() {
-		return usuario;
+	public List<Postagem> getPostagem() {
+		return postagem;
 	}
 
-	public void setUsuario(List<Usuario> usuario) {
-		this.usuario = usuario;
+	public void setPostagem(List<Postagem> postagem) {
+		this.postagem = postagem;
 	}
 	
 }
