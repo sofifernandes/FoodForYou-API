@@ -52,6 +52,10 @@ public class Postagem {
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
 	private Usuario usuario;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Comentario comentario;
 
 	public long getId() {
 		return id;
@@ -139,5 +143,14 @@ public class Postagem {
 
 	public void setInteresse(Interesse interesse) {
 		this.interesse = interesse;
-	}	
+	}
+
+	public Comentario getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(Comentario comentario) {
+		this.comentario = comentario;
+	}		
+	
 }

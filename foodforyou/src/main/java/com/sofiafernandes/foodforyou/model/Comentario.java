@@ -31,6 +31,10 @@ public class Comentario {
 	@ManyToOne
 	@JsonIgnoreProperties("comentarios")
 	private Postagem postagem;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("comentarios")
+	private Usuario usuario;
 
 	public long getId() {
 		return id;
@@ -63,6 +67,13 @@ public class Comentario {
 	public void setPostagem(Postagem postagem) {
 		this.postagem = postagem;
 	}
-	
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}	
 	
 }
