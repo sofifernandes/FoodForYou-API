@@ -24,8 +24,8 @@ public class Interesse {
 	@Size(min = 2, max = 255)
 	private String nome;
 	
-	@OneToMany(mappedBy = "postagem", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("postagem")
+	@OneToMany(mappedBy = "interesse", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("interesse")
 	private List<Postagem> postagem;
 
 	public long getId() {
