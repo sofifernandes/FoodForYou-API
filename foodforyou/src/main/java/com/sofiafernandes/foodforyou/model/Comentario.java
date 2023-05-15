@@ -3,6 +3,7 @@ package com.sofiafernandes.foodforyou.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,8 +30,9 @@ public class Comentario {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date = new java.sql.Date(System.currentTimeMillis());
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "postagem_id")
+	@JsonIgnoreProperties("comentarios")
 	private Postagem postagem;	
 
 	@ManyToOne
