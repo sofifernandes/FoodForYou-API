@@ -7,7 +7,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -31,7 +30,6 @@ public class Comentario {
 	private Date date = new java.sql.Date(System.currentTimeMillis());
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "postagem_id")
 	@JsonIgnoreProperties("comentarios")
 	private Postagem postagem;	
 

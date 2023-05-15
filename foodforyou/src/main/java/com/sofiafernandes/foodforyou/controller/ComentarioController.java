@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.sofiafernandes.foodforyou.model.Comentario;
 import com.sofiafernandes.foodforyou.repository.ComentarioRepository;
 
@@ -42,7 +41,8 @@ public class ComentarioController {
 	public ResponseEntity<Comentario> post(@RequestBody Comentario comentario)
 	{
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(comentario));
-	}
+	}	
+
 	
 	@PutMapping
 	public ResponseEntity<Comentario> put(@RequestBody Comentario comentario)
