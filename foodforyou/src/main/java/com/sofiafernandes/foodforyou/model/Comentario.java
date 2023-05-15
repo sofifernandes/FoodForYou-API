@@ -1,15 +1,13 @@
 package com.sofiafernandes.foodforyou.model;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,9 +29,9 @@ public class Comentario {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date = new java.sql.Date(System.currentTimeMillis());
 	
-	@OneToMany(mappedBy = "tema", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("tema")
-	private List<Postagem> postagem;	
+	@ManyToOne
+	@JoinColumn(name = "postagem_id")
+	private Postagem postagem;	
 
 	@ManyToOne
 	@JsonIgnoreProperties("comentarios")
@@ -62,14 +60,14 @@ public class Comentario {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
-	public List<Postagem> getPostagem() {
+	
+	public Postagem getPostagem() {
 		return postagem;
 	}
 
-	public void setPostagem(List<Postagem> postagem) {
+	public void setPostagem(Postagem postagem) {
 		this.postagem = postagem;
-	}
+	}	
 
 	public Usuario getUsuario() {
 		return usuario;

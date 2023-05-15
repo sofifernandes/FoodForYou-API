@@ -1,12 +1,15 @@
 package com.sofiafernandes.foodforyou.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -53,9 +56,9 @@ public class Postagem {
 	@JsonIgnoreProperties("postagem")
 	private Usuario usuario;
 	
-	@ManyToOne
+	@OneToMany(mappedBy = "postagem", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("postagem")
-	private Comentario comentario;
+	private List<Comentario> comentarios;
 
 	public long getId() {
 		return id;
@@ -145,12 +148,12 @@ public class Postagem {
 		this.interesse = interesse;
 	}
 
-	public Comentario getComentario() {
-		return comentario;
+	public List<Comentario> getComentarios() {
+		return comentarios;
 	}
 
-	public void setComentario(Comentario comentario) {
-		this.comentario = comentario;
-	}		
+	public void setComentarios(List<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}			
 	
 }
