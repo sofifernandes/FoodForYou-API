@@ -13,10 +13,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "tb_comentarios")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Comentario.class)
 public class Comentario {
 
 	@Id	
@@ -30,11 +33,10 @@ public class Comentario {
 	private Date date = new java.sql.Date(System.currentTimeMillis());
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnoreProperties("comentarios")
+	@JsonIdentityReference(alwaysAsId = true)
 	private Postagem postagem;	
 
 	@ManyToOne
-	@JsonIgnoreProperties("comentarios")
 	private Usuario usuario;
 
 	public long getId() {

@@ -11,10 +11,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "tb_interesse")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Interesse.class)
 public class Interesse {
 
 	@Id	
@@ -25,7 +27,6 @@ public class Interesse {
 	private String nome;
 	
 	@OneToMany(mappedBy = "interesse", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("interesse")
 	private List<Postagem> postagem;
 
 	public long getId() {
