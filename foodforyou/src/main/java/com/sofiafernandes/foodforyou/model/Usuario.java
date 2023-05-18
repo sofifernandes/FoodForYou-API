@@ -11,8 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -45,10 +45,8 @@ public class Usuario {
 	private boolean admin;
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
-	private List<Postagem> postagem;			
-	
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
-	private List<Comentario> comentario;
+	@JsonIgnoreProperties("usuario")
+	private List<Postagem> postagem;		
 
 	public long getId() {
 		return id;
@@ -96,14 +94,6 @@ public class Usuario {
 
 	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
-	}	
-
-	public List<Comentario> getComentario() {
-		return comentario;
-	}
-
-	public void setComentario(List<Comentario> comentario) {
-		this.comentario = comentario;
 	}
 
 	public String getFoto() {

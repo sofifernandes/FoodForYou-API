@@ -15,51 +15,54 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tb_postagem")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Postagem.class)
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Postagem.class)
 public class Postagem {
 
-	@Id	
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@Size(min = 2, max = 255)
 	private String tipoPostagem;
-	
-	@Size(min=0, max=255)
+
+	@Size(min = 0, max = 255)
 	private String titulo;
-	
-	@Size(min=0, max= 511)
-	private String textoPostagem;	
-	
+
+	@Size(min = 0, max = 511)
+	private String textoPostagem;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date = new java.sql.Date(System.currentTimeMillis());
-	
+
 	private long qntComentarios;
-	
+
 	private long qntCurtidas;
-	
+
 	private long qntVisualizacoes;
 
 	@ManyToOne
 	@JsonIdentityReference(alwaysAsId = true)
+	@JsonIgnoreProperties("postagem")
 	private Tema tema;
-	
+
 	@ManyToOne
 	@JsonIdentityReference(alwaysAsId = true)
+	@JsonIgnoreProperties("postagem")
 	private Interesse interesse;
-	
+
 	@ManyToOne
 	@JsonIdentityReference(alwaysAsId = true)
+	@JsonIgnore
 	private Usuario usuario;
-	
-	@OneToMany(mappedBy = "postagem", cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "postagem", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JsonIgnoreProperties("postagem")
 	private List<Comentario> comentarios;
 
 	public long getId() {
@@ -125,7 +128,7 @@ public class Postagem {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
+
 	public long getQntComentarios() {
 		return qntComentarios;
 	}
@@ -156,6 +159,6 @@ public class Postagem {
 
 	public void setComentarios(List<Comentario> comentarios) {
 		this.comentarios = comentarios;
-	}			
-	
+	}
+
 }

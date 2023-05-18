@@ -11,4 +11,6 @@ import com.sofiafernandes.foodforyou.model.Comentario;
 public interface ComentarioRepository extends JpaRepository<Comentario, Long>{
 
 	public List<Comentario> findAllById(Long id);
+	
+	public List<Comentario> findByPostagemId(long postId);
 }

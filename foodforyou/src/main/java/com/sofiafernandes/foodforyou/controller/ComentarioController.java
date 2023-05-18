@@ -31,6 +31,12 @@ public class ComentarioController {
 		return ResponseEntity.ok(repository.findAll());
 	}
 	
+	@GetMapping("/post/{postId}")
+	public ResponseEntity<List<Comentario>> getComentariosByPost(@PathVariable long postId) {
+	    List<Comentario> comentarios = repository.findByPostagemId(postId);
+	    return ResponseEntity.ok(comentarios);
+	}
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<Comentario> findByIdPostagem(@PathVariable long id)
 	{
