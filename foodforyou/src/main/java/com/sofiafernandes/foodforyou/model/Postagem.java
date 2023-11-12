@@ -23,7 +23,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "tb_postagem")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Postagem.class)
 public class Postagem {
 
 	@Id
@@ -59,8 +58,7 @@ public class Postagem {
 	private Interesse interesse;
 
 	@ManyToOne
-	@JsonIdentityReference(alwaysAsId = true)
-	@JsonIgnore
+	@JsonIgnoreProperties("postagem")
 	private Usuario usuario;
 
 	@OneToMany(mappedBy = "postagem", cascade = CascadeType.ALL)
