@@ -51,7 +51,7 @@ public class ComentarioController {
 
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Comentario> put(@PathVariable Long id, @RequestBody Comentario comentario)
+	public ResponseEntity<Comentario> put(@PathVariable long id, @RequestBody Comentario comentario)
 	{
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(comentario));
 	}
