@@ -46,7 +46,7 @@ public class Postagem {
 
 	@ManyToOne
 	@JsonIdentityReference(alwaysAsId = true)
-	@JsonIgnoreProperties("postagem")
+	@JsonIgnoreProperties
 	private Tema tema;
 
 	@ManyToOne
