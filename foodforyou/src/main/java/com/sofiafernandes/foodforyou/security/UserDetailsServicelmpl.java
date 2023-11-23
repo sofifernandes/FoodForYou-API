@@ -15,9 +15,9 @@ public class UserDetailsServicelmpl {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	public UserDetailsImpl loadUserByUsername(String userName) throws UsernameNotFoundException {
-		Optional<Usuario> user = usuarioRepository.findByUsuario(userName);
-		user.orElseThrow(() -> new UsernameNotFoundException(userName + " not found."));
+	public UserDetailsImpl loadUserByUsername(String nome) throws UsernameNotFoundException {
+		Optional<Usuario> user = usuarioRepository.findByNome(nome);
+		user.orElseThrow(() -> new UsernameNotFoundException(nome + " not found."));
 		
 		return user.map(UserDetailsImpl::new).get();
 	}	

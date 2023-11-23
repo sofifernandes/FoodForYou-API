@@ -12,25 +12,39 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "tb_comentarios")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Comentario.class)
 public class Comentario {
 
-	@Id	
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@Size(min = 2, max = 511)
 	private String comentario;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date = new java.sql.Date(System.currentTimeMillis());
-	
+
 	@ManyToOne
-	@JsonIgnoreProperties("comentarios")
-	private Postagem postagem;
+	@JsonIdentityReference(alwaysAsId = true)
+    @JsonIgnoreProperties
+    private Postagem postagem;
+
+	public Comentario() {
+	}
+
+	public Comentario(String comentario, Date date, Postagem postagem) {
+		this.comentario = comentario;
+		this.date = date;
+		this.postagem = postagem;
+	}
 
 	public long getId() {
 		return id;
@@ -63,6 +77,5 @@ public class Comentario {
 	public void setPostagem(Postagem postagem) {
 		this.postagem = postagem;
 	}
-	
-	
+
 }

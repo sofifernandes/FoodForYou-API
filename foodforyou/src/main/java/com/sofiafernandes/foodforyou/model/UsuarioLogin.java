@@ -11,6 +11,8 @@ public class UsuarioLogin {
 	private String usuario;
 	
     private String senha;
+    
+    private String foto;
 	
     private String token;
 	
@@ -71,6 +73,14 @@ public class UsuarioLogin {
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+	
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 	
 }

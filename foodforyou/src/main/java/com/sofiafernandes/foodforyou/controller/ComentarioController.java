@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.sofiafernandes.foodforyou.model.Comentario;
 import com.sofiafernandes.foodforyou.repository.ComentarioRepository;
 
@@ -32,6 +31,12 @@ public class ComentarioController {
 		return ResponseEntity.ok(repository.findAll());
 	}
 	
+	@GetMapping("/post/{postId}")
+	public ResponseEntity<List<Comentario>> getComentariosByPost(@PathVariable long postId) {
+	    List<Comentario> comentarios = repository.findByPostagemId(postId);
+	    return ResponseEntity.ok(comentarios);
+	}
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<Comentario> findByIdPostagem(@PathVariable long id)
 	{
@@ -42,10 +47,11 @@ public class ComentarioController {
 	public ResponseEntity<Comentario> post(@RequestBody Comentario comentario)
 	{
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(comentario));
-	}
+	}	
+
 	
-	@PutMapping
-	public ResponseEntity<Comentario> put(@RequestBody Comentario comentario)
+	@PutMapping("/{id}")
+	public ResponseEntity<Comentario> put(@PathVariable long id, @RequestBody Comentario comentario)
 	{
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(comentario));
 	}

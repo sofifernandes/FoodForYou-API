@@ -50,8 +50,8 @@ public class InteresseController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(interesse));
 	}
 	
-	@PutMapping
-	public ResponseEntity<Interesse> put(@RequestBody Interesse interesse)
+	@PutMapping("/{id}")
+	public ResponseEntity<Interesse> put(@PathVariable Long id, @RequestBody Interesse interesse)
 	{
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(interesse));
 	}

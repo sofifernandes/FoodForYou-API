@@ -15,18 +15,28 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tb_interesse")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Interesse.class)
 public class Interesse {
 
-	@Id	
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+	// ...
+
+	public Interesse() {
+		// Default constructor
+	}
+
+	public Interesse(int id) {
+		this.id = id;
+	}
+
 	@Size(min = 2, max = 255)
 	private String nome;
-	
+
 	@OneToMany(mappedBy = "interesse", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("interesse")
-	private List<Usuario> usuario;
+	private List<Postagem> postagem;
 
 	public long getId() {
 		return id;
@@ -34,7 +44,7 @@ public class Interesse {
 
 	public void setId(long id) {
 		this.id = id;
-	}	
+	}
 
 	public String getNome() {
 		return nome;
@@ -44,12 +54,12 @@ public class Interesse {
 		this.nome = nome;
 	}
 
-	public List<Usuario> getUsuario() {
-		return usuario;
+	public List<Postagem> getPostagem() {
+		return postagem;
 	}
 
-	public void setUsuario(List<Usuario> usuario) {
-		this.usuario = usuario;
+	public void setPostagem(List<Postagem> postagem) {
+		this.postagem = postagem;
 	}
-	
+
 }
