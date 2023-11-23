@@ -41,8 +41,8 @@ public class BasicSecurityConfig implements UserDetailsService {
 	@Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable().authorizeRequests()
-        		.antMatchers("/logar").permitAll()
-        		.antMatchers("/cadastrar").permitAll()        		
+        		.antMatchers("/usuario/logar").permitAll()
+        		.antMatchers("/usuario/cadastrar").permitAll()        		
                 .anyRequest().authenticated()        
                 .and().httpBasic()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
