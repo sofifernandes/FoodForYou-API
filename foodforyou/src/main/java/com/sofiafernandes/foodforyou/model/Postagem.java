@@ -45,6 +45,7 @@ public class Postagem {
 	private long qntVisualizacoes;
 
 	@ManyToOne
+	@JsonIdentityReference(alwaysAsId = true)
 	@JsonIgnoreProperties("postagem")
 	private Tema tema;
 
