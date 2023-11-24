@@ -29,8 +29,8 @@ public class Tema {
 	
 	private long qnt_posts;
 	
-	@OneToMany(mappedBy = "tema")
-	@JsonIgnoreProperties("tema")
+	@OneToMany(mappedBy = "tema", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties
 	private List<Postagem> postagem;
 
 	public long getId() {
